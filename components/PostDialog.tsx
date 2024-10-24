@@ -63,7 +63,15 @@ export function PostDialog({ setOpen, open, src} : {setOpen:any, open:boolean, s
             </div>
           </DialogTitle>
         </DialogHeader>
-        <form action={postActionHandler}>
+        <form action={(formData) =>{
+          const promise = postActionHandler(formData);
+          toast.promise(promise,{
+            loading:"creating post....",
+            success:"post created",
+            error:"Failed to create post"
+          })
+
+        }}>
           <div className="flex flex-col">
             <Textarea
               id="name"
